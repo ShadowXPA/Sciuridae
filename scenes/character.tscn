@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6ni335ooay4i"]
+
+[ext_resource type="Script" uid="uid://6e77xd85wfk4" path="res://scripts/Character.cs" id="1_agfs1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dkjbp"]
+lightmap_size_hint = Vector2i(8, 5)
+radius = 0.1925
+height = 0.385
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_agfs1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_agfs1"]
+radius = 0.1925
+height = 0.385
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_agfs1"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_agfs1")
+
+[node name="Skin" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CapsuleMesh_dkjbp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin"]
+transform = Transform3D(0.165, 0, 0, 0, -7.21238e-09, -0.165, 0, 0.165, -7.21238e-09, 0, -0.015, -0.235469)
+mesh = SubResource("CapsuleMesh_agfs1")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CapsuleShape3D_agfs1")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 0.3, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+shape = SubResource("SphereShape3D_agfs1")
+spring_length = 5.0
+
+[node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0)
