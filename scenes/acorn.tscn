@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmkhc824k5sbf"]
+
+[ext_resource type="Script" uid="uid://djpgcs1dt03fg" path="res://scripts/Acorn.cs" id="1_7v76u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_135o3"]
+albedo_color = Color(0.431373, 0.223529, 0.0705882, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wgf4k"]
+material = SubResource("StandardMaterial3D_135o3")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_561h7"]
+radius = 0.2
+
+[node name="Acorn" type="Node3D"]
+script = ExtResource("1_7v76u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wgf4k")
+
+[node name="PickupArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_mask = 2147483648
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+shape = SubResource("SphereShape3D_561h7")

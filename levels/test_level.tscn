@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3lqg7mb57sbj"]
+
+[ext_resource type="Texture2D" uid="uid://caqd40d6xvulf" path="res://kenney_prototype-textures/Vector/texture_01.svg" id="1_46lwt"]
+[ext_resource type="PackedScene" uid="uid://gj2v6cldo0ot" path="res://scenes/nut_spawner.tscn" id="2_x25rp"]
+[ext_resource type="PackedScene" uid="uid://dmkhc824k5sbf" path="res://scenes/acorn.tscn" id="3_gmgay"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w7r7j"]
+size = Vector3(100, 0, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x25rp"]
+albedo_texture = ExtResource("1_46lwt")
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gmgay"]
+material = SubResource("StandardMaterial3D_x25rp")
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_46lwt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gmgay"]
+size = Vector3(98, 0, 98)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_w7r7j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_gmgay")
+
+[node name="WorldBorder" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 50, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_46lwt")
+debug_color = Color(0.995998, 0, 0.195104, 0.42)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -50, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_46lwt")
+debug_color = Color(0.995998, 0, 0.195104, 0.42)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 50)
+shape = SubResource("WorldBoundaryShape3D_46lwt")
+debug_color = Color(0.995998, 0, 0.195104, 0.42)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -50)
+shape = SubResource("WorldBoundaryShape3D_46lwt")
+debug_color = Color(0.995998, 0, 0.195104, 0.42)
+
+[node name="NutSpawner" parent="." node_paths=PackedStringArray("SpawnContainer", "SpawnTimer", "SpawnArea") instance=ExtResource("2_x25rp")]
+SpawnContainer = NodePath("Container")
+SpawnTimer = NodePath("SpawnTimer")
+SpawnArea = NodePath("Area3D/CollisionShape3D")
+NutScene = ExtResource("3_gmgay")
+
+[node name="SpawnTimer" type="Timer" parent="NutSpawner"]
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="NutSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NutSpawner/Area3D"]
+shape = SubResource("BoxShape3D_gmgay")
+debug_color = Color(0.36923, 0.284477, 0.139223, 1)
+
+[node name="Container" type="Node" parent="NutSpawner"]

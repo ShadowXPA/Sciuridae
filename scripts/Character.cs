@@ -20,22 +20,28 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float JumpVelocity { get; set; } = 5.0f;
 
+	[Signal]
+	public delegate void AcornGrabbedEventHandler();
+
 	private Node3D? _cameraPivot;
 	private Camera3D? _camera;
-	private MeshInstance3D? _skin;
+	private CollisionShape3D? _skin;
 	private Vector2 _cameraInputDirection = Vector2.Zero;
 	private Vector3 _lastMovementDirection = Vector3.Back;
+	private bool _inputEnabled = true;
 
 	public override void _Ready()
 	{
 		_cameraPivot = GetNode<Node3D>("%CameraPivot");
 		_camera = GetNode<Camera3D>("%Camera");
-		_skin = GetNode<MeshInstance3D>("%Skin");
+		_skin = GetNode<CollisionShape3D>("%Skin");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!_inputEnabled) return;
+
 		if (@event.IsActionPressed("left_click"))
 		{
 			Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -45,10 +51,12 @@ public partial class Character : CharacterBody3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-    }
+	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		if (!_inputEnabled) return;
+
 		if (@event is InputEventMouseMotion inputEventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
 		{
 			_cameraInputDirection = inputEventMouseMotion.ScreenRelative * CameraSensitivity;
@@ -57,6 +65,8 @@ public partial class Character : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!_inputEnabled) return;
+
 		var cameraPivotRotation = _cameraPivot!.Rotation;
 		cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
 		cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
@@ -100,5 +110,16 @@ public partial class Character : CharacterBody3D
 		var globalRotation = _skin!.GlobalRotation;
 		globalRotation.Y = Mathf.LerpAngle(globalRotation.Y, targetAngle, RotationSpeed * (float)delta);
 		_skin.GlobalRotation = globalRotation;
+	}
+
+	public void GrabAcorn(Acorn acorn)
+	{
+		GD.PrintS("I grabbed an acorn!", acorn);
+		EmitSignal(SignalName.AcornGrabbed);
+	}
+
+	public void SetInputEnabled(bool inputEnabled)
+	{
+		_inputEnabled = inputEnabled;
 	}
 }

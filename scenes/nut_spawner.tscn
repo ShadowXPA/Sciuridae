@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gj2v6cldo0ot"]
+
+[ext_resource type="Script" uid="uid://b1j4rgvl8s1i5" path="res://scripts/NutSpawner.cs" id="1_1fk5x"]
+
+[node name="NutSpawner" type="Node3D"]
+script = ExtResource("1_1fk5x")

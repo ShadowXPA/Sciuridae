@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="Sciuridae"
+config/version="1.0.0"
 run/main_scene="uid://bsy5ftm7l10k8"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/handheld/orientation=4
 
 [dotnet]
 
