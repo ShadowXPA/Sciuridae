@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3u75m1xwjc7f"]
+
+[ext_resource type="Terrain3DMaterial" uid="uid://o5g3bkjbc7mh" path="res://levels/forest/forest_level_material.tres" id="1_bo0od"]
+[ext_resource type="Terrain3DAssets" uid="uid://bvfhgn6phukct" path="res://levels/forest/forest_level_assets.tres" id="2_3f6fi"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bo0od"]
+
+[node name="ForestLevel" type="Node3D"]
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://levels/forest"
+material = ExtResource("1_bo0od")
+assets = ExtResource("2_3f6fi")
+show_grid = true
+show_region_grid = true
+show_checkered = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="WorldBorder" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 60, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_bo0od")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -60, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_bo0od")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 60)
+shape = SubResource("WorldBoundaryShape3D_bo0od")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -60)
+shape = SubResource("WorldBoundaryShape3D_bo0od")
+debug_color = Color(1, 0, 0, 0.419608)
