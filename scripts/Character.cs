@@ -19,6 +19,8 @@ public partial class Character : CharacterBody3D
 	public float RotationSpeed { get; set; } = 12.0f;
 	[Export]
 	public float JumpVelocity { get; set; } = 5.0f;
+	[Export]
+	public float SprintMultiplier { get; set; } = .75f;
 
 	[Signal]
 	public delegate void AcornGrabbedEventHandler();
@@ -76,6 +78,7 @@ public partial class Character : CharacterBody3D
 
 		Vector3 velocity = Velocity;
 		Vector2 rawInput = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
+		var sprinting = IsOnFloor() ? Input.GetActionRawStrength("sprint") : 0;
 		var forward = _camera!.GlobalBasis.Z;
 		var right = _camera.GlobalBasis.X;
 
@@ -85,7 +88,7 @@ public partial class Character : CharacterBody3D
 
 		var yVelocity = velocity.Y;
 		velocity.Y = 0;
-		velocity = velocity.MoveToward(moveDirection * Speed, Acceleration * (float)delta);
+		velocity = velocity.MoveToward(moveDirection * Speed * ((SprintMultiplier * sprinting) + 1.0f), Acceleration * (float)delta);
 		velocity.Y = yVelocity;
 
 		if (!IsOnFloor())
