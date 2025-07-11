@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsy5ftm7l10k8"]
 
-[ext_resource type="PackedScene" uid="uid://c3u75m1xwjc7f" path="res://levels/forest/forest_level.tscn" id="2_p57ef"]
+[ext_resource type="PackedScene" uid="uid://btvq16olqgchu" path="res://levels/forest/forest_level.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6ni335ooay4i" path="res://scenes/player.tscn" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://dx2yuvohme3gi" path="res://scripts/GameManager.cs" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://oo3j2glgxe0m" path="res://scenes/ui.tscn" id="5_p57ef"]

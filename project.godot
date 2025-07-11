@@ -32,6 +32,10 @@ project/assembly_name="Sciuridae"
 
 enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left_click={

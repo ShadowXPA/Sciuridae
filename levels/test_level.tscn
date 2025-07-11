@@ -30,6 +30,7 @@ size = Vector2(100, 100)
 navigation_mesh = SubResource("NavigationMesh_gmgay")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+top_level = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_w7r7j")
