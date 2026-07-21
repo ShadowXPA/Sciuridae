@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt25vgwi3ymgf"]
+[gd_scene format=3 uid="uid://dt25vgwi3ymgf"]
 
 [ext_resource type="Script" uid="uid://x80i6yahmiai" path="res://scripts/GameOver.cs" id="1_xeevv"]
 
@@ -177,7 +177,7 @@ font_color = Color(1, 1, 1, 0)
 outline_size = 4
 outline_color = Color(0, 0, 0, 0)
 
-[node name="GameOver" type="Control"]
+[node name="GameOver" type="Control" unique_id=400513903]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,14 +186,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xeevv")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=815184618]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_wqhvx")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_wqhvx")
+autoplay = &"RESET"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=958689482]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,7 +200,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.196078)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1373925179]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -219,25 +217,25 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=7492280]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer" unique_id=844028009]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_xeevv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Message" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Message" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2065490855]
 layout_mode = 2
 text = "Time is up!"
 label_settings = SubResource("LabelSettings_wqhvx")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer" unique_id=701065126]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -246,16 +244,16 @@ label_settings = SubResource("LabelSettings_tbwuq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=718205831]
 layout_mode = 2
 
-[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=714334346]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Restart"
 
-[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1210820901]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32

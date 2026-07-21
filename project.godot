@@ -8,14 +8,18 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Sciuridae"
 config/version="1.0.0"
 run/main_scene="uid://bsy5ftm7l10k8"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-boot_splash/fullsize=false
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+boot_splash/stretch_mode=0
 config/icon="res://icon.svg"
 
 [display]
