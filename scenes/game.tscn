@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsy5ftm7l10k8"]
+[gd_scene format=3 uid="uid://bsy5ftm7l10k8"]
 
 [ext_resource type="PackedScene" uid="uid://btvq16olqgchu" path="res://levels/forest/forest_level.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6ni335ooay4i" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://6bp5cvaqbmos" path="res://scenes/main_menu.tscn" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://dx2yuvohme3gi" path="res://scripts/GameManager.cs" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://oo3j2glgxe0m" path="res://scenes/ui.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dt25vgwi3ymgf" path="res://scenes/game_over.tscn" id="6_u5sy4"]
@@ -19,34 +20,37 @@ sky = SubResource("Sky_0tnpc")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" unique_id=1973169825]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1603164766]
 environment = SubResource("Environment_vtaks")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1157123307]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("2_yqjtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.433449, 0)
+[node name="Player" parent="." unique_id=547186913 instance=ExtResource("2_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="ForestLevel" parent="." instance=ExtResource("2_p57ef")]
+[node name="ForestLevel" parent="." unique_id=2722062 instance=ExtResource("2_p57ef")]
 
-[node name="GameTimer" type="Timer" parent="."]
+[node name="GameTimer" type="Timer" parent="." unique_id=2084529668]
 unique_name_in_owner = true
-wait_time = 300.0
+wait_time = 100.0
 one_shot = true
-autostart = true
 
-[node name="UI" parent="." instance=ExtResource("5_p57ef")]
+[node name="MainMenu" parent="." unique_id=1510993753 instance=ExtResource("3_p57ef")]
 
-[node name="GameOver" parent="." instance=ExtResource("6_u5sy4")]
+[node name="UI" parent="." unique_id=512039653 instance=ExtResource("5_p57ef")]
 visible = false
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("Character", "Ui", "GameTimer", "GameOverUi")]
+[node name="GameOver" parent="." unique_id=78023160 instance=ExtResource("6_u5sy4")]
+visible = false
+
+[node name="GameManager" type="Node" parent="." unique_id=412135009 node_paths=PackedStringArray("Character", "MainMenu", "Ui", "GameTimer", "GameOver")]
 script = ExtResource("5_iywne")
 Character = NodePath("../Player")
+MainMenu = NodePath("../MainMenu")
 Ui = NodePath("../UI")
 GameTimer = NodePath("../GameTimer")
-GameOverUi = NodePath("../GameOver")
+GameOver = NodePath("../GameOver")

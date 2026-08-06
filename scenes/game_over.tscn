@@ -258,3 +258,9 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Main Menu"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1533493432]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"

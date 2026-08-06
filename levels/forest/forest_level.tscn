@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btvq16olqgchu"]
+[gd_scene format=3 uid="uid://btvq16olqgchu"]
 
 [ext_resource type="Terrain3DMaterial" uid="uid://c0ekaowyd4k7a" path="res://levels/forest/forest_level_material.res" id="1_bo0od"]
 [ext_resource type="Terrain3DAssets" uid="uid://24ld8hm6eht5" path="res://levels/forest/forest_level_assets.res" id="2_3f6fi"]
@@ -12,12 +12,12 @@ cell_height = 0.13
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bo0od"]
 
-[node name="ForestLevel" type="Node3D"]
+[node name="ForestLevel" type="Node3D" unique_id=1272415143]
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1796102171]
 navigation_mesh = SubResource("NavigationMesh_klhs7")
 
-[node name="Terrain3D" type="Terrain3D" parent="NavigationRegion3D"]
+[node name="Terrain3D" type="Terrain3D" parent="NavigationRegion3D" unique_id=828902563]
 data_directory = "res://levels/forest"
 material = ExtResource("1_bo0od")
 assets = ExtResource("2_3f6fi")
@@ -26,35 +26,34 @@ show_region_grid = true
 top_level = true
 metadata/_edit_lock_ = true
 
-[node name="WorldBorder" type="StaticBody3D" parent="."]
+[node name="WorldBorder" type="StaticBody3D" parent="." unique_id=1901849394]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBorder"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBorder" unique_id=1065672747]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 64, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_bo0od")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBorder"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBorder" unique_id=1471777422]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -64, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_bo0od")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="WorldBorder"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="WorldBorder" unique_id=1188554297]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 64)
 shape = SubResource("WorldBoundaryShape3D_bo0od")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="WorldBorder"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="WorldBorder" unique_id=1235472964]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -64)
 shape = SubResource("WorldBoundaryShape3D_bo0od")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="NutSpawner" parent="." node_paths=PackedStringArray("SpawnContainer", "SpawnTimer", "SpawnArea") instance=ExtResource("3_klhs7")]
+[node name="NutSpawner" parent="." unique_id=548494137 node_paths=PackedStringArray("SpawnContainer", "SpawnTimer", "SpawnArea") instance=ExtResource("3_klhs7")]
 SpawnContainer = NodePath("Container")
 SpawnTimer = NodePath("SpawnTimer")
 SpawnArea = NodePath("../NavigationRegion3D")
 NutScene = ExtResource("4_o14i8")
 
-[node name="SpawnTimer" type="Timer" parent="NutSpawner"]
-autostart = true
+[node name="SpawnTimer" type="Timer" parent="NutSpawner" unique_id=1575982638]
 
-[node name="Container" type="Node" parent="NutSpawner"]
+[node name="Container" type="Node" parent="NutSpawner" unique_id=1723131919]

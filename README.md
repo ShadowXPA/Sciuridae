@@ -2,7 +2,6 @@
 
 ## TO DO
 
-- Main Menu  
 - 3D models  
   - Squirrel  
   - Trees  

@@ -2,6 +2,7 @@ using Godot;
 
 public partial class Acorn : Node3D
 {
+	public int Score { get; set; } = 1;
 	private Area3D? _pickupArea;
 
 	public override void _Ready()

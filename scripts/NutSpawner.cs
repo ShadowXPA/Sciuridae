@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class NutSpawner : Node3D
 {
@@ -16,13 +16,39 @@ public partial class NutSpawner : Node3D
 	[Export]
 	public int MaxNuts { get; set; } = 50;
 
-	private int _numberOfNuts;
-
 	public override void _Ready()
 	{
 		if (SpawnTimer is null || SpawnArea is null) return;
 
 		SpawnTimer.Timeout += Spawn;
+		SignalBus.StartGame += StartGame;
+		SignalBus.RestartGame += StartGame;
+		SignalBus.GameOver += GameOver;
+	}
+
+	public override void _ExitTree()
+	{
+		if (SpawnTimer is not null)
+			SpawnTimer.Timeout -= Spawn;
+		SignalBus.StartGame -= StartGame;
+		SignalBus.RestartGame -= StartGame;
+		SignalBus.GameOver -= GameOver;
+	}
+
+	private void StartGame()
+	{
+		SpawnTimer?.Start();
+	}
+
+	private void GameOver()
+	{
+		SpawnTimer?.Stop();
+
+		if (SpawnContainer is not null)
+			foreach (var child in SpawnContainer.GetChildren())
+			{
+				child.QueueFree();
+			}
 	}
 
 	public Vector3 GetRandomSpawnPoint()
@@ -41,13 +67,11 @@ public partial class NutSpawner : Node3D
 
 	public void Spawn()
 	{
-		if (_numberOfNuts >= MaxNuts) return;
-		_numberOfNuts++;
-
 		var container = SpawnContainer ?? this;
 
+		if (container.GetChildCount() >= MaxNuts) return;
+
 		var instance = NutScene!.Instantiate<Node3D>();
-		instance.TreeExited += () => _numberOfNuts--;
 		container.AddChild(instance);
 		instance.GlobalPosition = GetRandomSpawnPoint();
 	}

@@ -1,6 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6ni335ooay4i"]
+[gd_scene format=3 uid="uid://b6ni335ooay4i"]
 
 [ext_resource type="Script" uid="uid://6e77xd85wfk4" path="res://scripts/Character.cs" id="1_agfs1"]
+
+[sub_resource type="Animation" id="Animation_3vyb7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.1745327, -3.1415925, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g2els"]
+resource_name = "rotate_camera"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.1745327, -3.1415925, 0), Vector3(-0.17453292, 3.1415927, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
+_data = {
+&"RESET": SubResource("Animation_3vyb7"),
+&"rotate_camera": SubResource("Animation_g2els")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_agfs1"]
 radius = 0.185412
@@ -16,33 +54,37 @@ height = 0.385
 [sub_resource type="SphereShape3D" id="SphereShape3D_agfs1"]
 radius = 0.2
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1063641842]
 collision_layer = 2147483649
 script = ExtResource("1_agfs1")
 
-[node name="Skin" type="CollisionShape3D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=843853004]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_qhqgy")
+
+[node name="Skin" type="CollisionShape3D" parent="." unique_id=455973470]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, -0.095)
 shape = SubResource("CapsuleShape3D_agfs1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin" unique_id=1294120376]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.095, 0)
 mesh = SubResource("CapsuleMesh_dkjbp")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin/MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin/MeshInstance3D" unique_id=1153749427]
 transform = Transform3D(0.165, 0, 0, 0, -7.21238e-09, -0.165, 0, 0.165, -7.21238e-09, 0, -0.015, -0.235469)
 mesh = SubResource("CapsuleMesh_agfs1")
 skeleton = NodePath("../../..")
 
-[node name="CameraPivot" type="Node3D" parent="."]
+[node name="CameraPivot" type="Node3D" parent="." unique_id=128764532]
 unique_name_in_owner = true
-transform = Transform3D(-1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 0.3, 0)
+transform = Transform3D(-1, 2.622012e-08, -1.4870187e-07, 0, 0.984808, 0.173648, 1.509958e-07, 0.173648, -0.984808, 0, 0.3, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=7535689]
 shape = SubResource("SphereShape3D_agfs1")
 spring_length = 5.0
 
-[node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+[node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1219773951]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0)

@@ -22,22 +22,24 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float SprintMultiplier { get; set; } = .75f;
 
-	[Signal]
-	public delegate void AcornGrabbedEventHandler();
-
+	private Vector3 _skinDefaultGlobalRotation;
+	private Vector3 _cameraDefaultRotation;
 	private Node3D? _cameraPivot;
 	private Camera3D? _camera;
 	private CollisionShape3D? _skin;
 	private Vector2 _cameraInputDirection = Vector2.Zero;
 	private Vector3 _lastMovementDirection = Vector3.Back;
-	private bool _inputEnabled = true;
+	private bool _inputEnabled = false;
+	private AnimationPlayer? _animationPlayer;
 
 	public override void _Ready()
 	{
 		_cameraPivot = GetNode<Node3D>("%CameraPivot");
 		_camera = GetNode<Camera3D>("%Camera");
 		_skin = GetNode<CollisionShape3D>("%Skin");
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		_animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
+		_cameraDefaultRotation = _cameraPivot.Rotation;
+		_skinDefaultGlobalRotation = _skin.GlobalRotation;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -115,10 +117,25 @@ public partial class Character : CharacterBody3D
 		_skin.GlobalRotation = globalRotation;
 	}
 
+	public void RotateCamera()
+	{
+		_animationPlayer?.Play("rotate_camera");
+	}
+
+	public void Reset()
+	{
+		_animationPlayer?.Play("RESET");
+		Velocity = Vector3.Zero;
+		Position = Vector3.Up;
+		if (_skin is not null)
+			_skin.GlobalRotation = _skinDefaultGlobalRotation;
+		if (_cameraPivot is not null)
+			_cameraPivot.Rotation = _cameraDefaultRotation;
+	}
+
 	public void GrabAcorn(Acorn acorn)
 	{
-		GD.PrintS("I grabbed an acorn!", acorn);
-		EmitSignal(SignalName.AcornGrabbed);
+		SignalBus.BroadcastAcornGrabbed(acorn);
 	}
 
 	public void SetInputEnabled(bool inputEnabled)

@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class GameManager : Node
 {
@@ -8,24 +8,42 @@ public partial class GameManager : Node
     [Export]
     public Character? Character { get; set; }
     [Export]
+    public MainMenu? MainMenu { get; set; }
+    [Export]
     public Ui? Ui { get; set; }
     [Export]
     public Timer? GameTimer { get; set; }
     [Export]
-    public GameOver? GameOverUi { get; set; }
-    public bool GameOver { get; private set; }
+    public GameOver? GameOver { get; set; }
 
     private int _score;
     private int _highscore;
 
     public override void _Ready()
     {
-        if (Character is null || Ui is null || GameTimer is null || GameOverUi is null) return;
+        if (Character is null || MainMenu is null || Ui is null || GameTimer is null || GameOver is null) return;
 
-        SetHighscore(LoadHighscore());
+        SignalBus.StartGame += StartGame;
+        SignalBus.RestartGame += RestartGame;
+        SignalBus.ReturnToMainMenu += ResetGame;
+        SignalBus.QuitGame += QuitGame;
+        SignalBus.AcornGrabbed += CharacterAcornGrabbed;
 
         GameTimer.Timeout += GameTimerTimeout;
-        Character.AcornGrabbed += CharacterAcornGrabbed;
+
+        ResetGame();
+    }
+
+    public override void _ExitTree()
+    {
+        SignalBus.StartGame -= StartGame;
+        SignalBus.RestartGame -= RestartGame;
+        SignalBus.ReturnToMainMenu -= ResetGame;
+        SignalBus.QuitGame -= QuitGame;
+        SignalBus.AcornGrabbed -= CharacterAcornGrabbed;
+
+        if (GameTimer is not null)
+            GameTimer.Timeout -= GameTimerTimeout;
     }
 
     public override void _Process(double delta)
@@ -36,10 +54,76 @@ public partial class GameManager : Node
         Ui!.Time!.Text = $"{minutes:D2}:{seconds:D2}";
     }
 
+    private void ReturnToMainMenu()
+    {
+        GetTree().ReloadCurrentScene();
+    }
+
+    private void ResetGame()
+    {
+        Character!.SetInputEnabled(false);
+        Character!.Reset();
+        Character!.RotateCamera();
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        GameTimer?.Stop();
+        MainMenu?.Show();
+        Ui?.Hide();
+        GameOver?.Hide();
+
+        _score = 0;
+        Ui!.Score!.Text = $"{_score}";
+        GameOver!.Highscore!.Visible = false;
+        SetHighscore(LoadHighscore());
+    }
+
+    private void StartGame()
+    {
+        Character!.Reset();
+        MainMenu?.Hide();
+        Ui?.Show();
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+        Character!.SetInputEnabled(true);
+        GameTimer?.Start();
+    }
+
+    private void RestartGame()
+    {
+        ResetGame();
+        StartGame();
+    }
+
+    private void QuitGame()
+    {
+        GetTree().Quit();
+    }
+
     private void SetHighscore(int score)
     {
         _highscore = score;
         Ui!.Highscore!.Text = $"Highscore: {_highscore}";
+    }
+
+    private void CharacterAcornGrabbed(Acorn acorn)
+    {
+        _score += acorn.Score;
+        Ui!.Score!.Text = $"{_score}";
+    }
+
+    private void GameTimerTimeout()
+    {
+        SignalBus.BroadcastGameOver();
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        Character!.SetInputEnabled(false);
+
+        if (_score > _highscore)
+        {
+            SetHighscore(_score);
+            GameOver!.Highscore!.Visible = true;
+            SaveHighscore(_score);
+        }
+
+        GameOver!.AnimationPlayer!.Play("game_over");
+        GameOver.Visible = true;
     }
 
     private int LoadHighscore()
@@ -57,30 +141,5 @@ public partial class GameManager : Node
         var encoded = Marshalls.RawToBase64(BitConverter.GetBytes(score));
         using var file = FileAccess.Open(HIGHSCORE_PATH, FileAccess.ModeFlags.Write);
         file.StoreString(encoded);
-    }
-
-    private void CharacterAcornGrabbed()
-    {
-        _score += 1;
-        GD.Print("As game manager I can attest to that...");
-        Ui!.Score!.Text = $"{_score}";
-    }
-
-    private void GameTimerTimeout()
-    {
-        GameOver = true;
-        Input.MouseMode = Input.MouseModeEnum.Visible;
-        Character!.SetInputEnabled(false);
-        Character.AcornGrabbed -= CharacterAcornGrabbed;
-        GD.Print("Game is over!");
-        if (_score > _highscore)
-        {
-            SetHighscore(_score);
-            GameOverUi!.Highscore!.Visible = true;
-            SaveHighscore(_score);
-        }
-
-        GameOverUi!.AnimationPlayer!.Play("game_over");
-        GameOverUi.Visible = true;
     }
 }
