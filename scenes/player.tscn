@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b6ni335ooay4i"]
 
 [ext_resource type="Script" uid="uid://6e77xd85wfk4" path="res://scripts/Character.cs" id="1_agfs1"]
+[ext_resource type="PackedScene" uid="uid://igm2o685l2ld" path="res://scenes/squirrel/nutty.tscn" id="2_g2els"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
@@ -44,13 +45,6 @@ _data = {
 radius = 0.185412
 height = 0.58
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dkjbp"]
-lightmap_size_hint = Vector2i(8, 5)
-radius = 0.1925
-height = 0.385
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_agfs1"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_agfs1"]
 radius = 0.2
 
@@ -64,18 +58,12 @@ libraries/ = SubResource("AnimationLibrary_qhqgy")
 
 [node name="Skin" type="CollisionShape3D" parent="." unique_id=455973470]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, -0.095)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
 shape = SubResource("CapsuleShape3D_agfs1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin" unique_id=1294120376]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.095, 0)
-mesh = SubResource("CapsuleMesh_dkjbp")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skin/MeshInstance3D" unique_id=1153749427]
-transform = Transform3D(0.165, 0, 0, 0, -7.21238e-09, -0.165, 0, 0.165, -7.21238e-09, 0, -0.015, -0.235469)
-mesh = SubResource("CapsuleMesh_agfs1")
-skeleton = NodePath("../../..")
+[node name="Nutty" parent="Skin" unique_id=296260741 instance=ExtResource("2_g2els")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.2)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=128764532]
 unique_name_in_owner = true

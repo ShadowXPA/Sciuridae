@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://igm2o685l2ld"]
+
+[ext_resource type="PackedScene" uid="uid://28wf7hrfxlwv" path="res://scenes/squirrel/squirrel.glb" id="1_idwa6"]
+[ext_resource type="Script" uid="uid://cv6jtgk2h0o6y" path="res://scripts/Nutty.cs" id="2_hg6ip"]
+
+[node name="Sketchfab_Scene" unique_id=296260741 instance=ExtResource("1_idwa6")]
+script = ExtResource("2_hg6ip")
+
+[node name="Skeleton3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/SquirrelArmature_36/GLTF_created_0" parent_id_path=PackedInt32Array(1560182145) index="0" unique_id=362235890]
+bones/6/rotation = Quaternion(0.45045745, 0.005905376, -0.03992602, 0.89188516)
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=487712791]
+unique_name_in_owner = true

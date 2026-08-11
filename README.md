@@ -3,7 +3,6 @@
 ## TO DO
 
 - 3D models  
-  - Squirrel  
   - Trees  
   - Foliage  
 - Better movement  

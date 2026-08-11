@@ -2,6 +2,8 @@ using Godot;
 
 public partial class Character : CharacterBody3D
 {
+	private static readonly double IDLE_TIMER_DEFAULT = 2;
+
 	[ExportGroup("Camera")]
 	[Export(PropertyHint.Range, "0.0, 1.0")]
 	public float CameraSensitivity { get; set; } = .5f;
@@ -22,6 +24,8 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float SprintMultiplier { get; set; } = .75f;
 
+	private double _idleTimer = IDLE_TIMER_DEFAULT;
+	private Nutty? _nutty;
 	private Vector3 _skinDefaultGlobalRotation;
 	private Vector3 _cameraDefaultRotation;
 	private Node3D? _cameraPivot;
@@ -31,9 +35,11 @@ public partial class Character : CharacterBody3D
 	private Vector3 _lastMovementDirection = Vector3.Back;
 	private bool _inputEnabled = false;
 	private AnimationPlayer? _animationPlayer;
+	private bool _moved = false;
 
 	public override void _Ready()
 	{
+		_nutty = GetNode<Nutty>("%Nutty");
 		_cameraPivot = GetNode<Node3D>("%CameraPivot");
 		_camera = GetNode<Camera3D>("%Camera");
 		_skin = GetNode<CollisionShape3D>("%Skin");
@@ -71,6 +77,15 @@ public partial class Character : CharacterBody3D
 	{
 		if (!_inputEnabled) return;
 
+		_idleTimer -= delta;
+		GD.Print(_idleTimer);
+
+		if (_idleTimer <= 0)
+		{
+			_idleTimer = IDLE_TIMER_DEFAULT;
+			_nutty?.PlayAnimation("Idle");
+		}
+
 		var cameraPivotRotation = _cameraPivot!.Rotation;
 		cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
 		cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
@@ -97,10 +112,28 @@ public partial class Character : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
+		else
+		{
+			if (rawInput.IsZeroApprox())
+			{
+				if (_moved)
+				{
+					_moved = false;
+					_nutty?.PlayAnimation("RESET");
+				}
+			}
+			else
+			{
+				_moved = true;
+				_idleTimer = IDLE_TIMER_DEFAULT;
+				_nutty?.PlayAnimation("Run");
+			}
+		}
 
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+			_nutty?.PlayAnimation("RESET");
 		}
 
 		Velocity = velocity;
