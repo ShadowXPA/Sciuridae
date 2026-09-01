@@ -14,7 +14,6 @@ public partial class Nutty : Node3D
 	{
 		if (_animationPlayer is null || _animationPlayer.IsPlaying() && _animationPlayer.CurrentAnimation == animation) return;
 
-		GD.Print($"Request to play: {animation}");
 		_animationPlayer?.Play(animation);
 	}
 

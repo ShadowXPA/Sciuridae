@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ba1xtk2m1lwx5"]
+
+[ext_resource type="PackedScene" uid="uid://dutcp2jkusn8n" path="res://scenes/tree/Tree.glb" id="1_cuvwl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cuvwl"]
+size = Vector3(1.3668823, 9.013245, 1.0662842)
+
+[node name="Tree" unique_id=1449161648 instance=ExtResource("1_cuvwl")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0" unique_id=1259349009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5009873, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=148818612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026031494, 4.5066223, 0.03314209)
+shape = SubResource("BoxShape3D_cuvwl")
+
+[node name="Cube" parent="." index="1" unique_id=992318463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5009873, 0)
+
+[node name="Image_001301" parent="." index="2" unique_id=2077740590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5009873, 0)
+visible = false

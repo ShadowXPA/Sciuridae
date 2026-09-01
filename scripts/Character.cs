@@ -78,7 +78,6 @@ public partial class Character : CharacterBody3D
 		if (!_inputEnabled) return;
 
 		_idleTimer -= delta;
-		GD.Print(_idleTimer);
 
 		if (_idleTimer <= 0)
 		{
