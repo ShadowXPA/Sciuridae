@@ -2,12 +2,72 @@
 
 [ext_resource type="PackedScene" uid="uid://28wf7hrfxlwv" path="res://scenes/squirrel/squirrel.glb" id="1_idwa6"]
 [ext_resource type="Script" uid="uid://cv6jtgk2h0o6y" path="res://scripts/Nutty.cs" id="2_hg6ip"]
+[ext_resource type="Curve" uid="uid://b3tp5nxeww4yy" path="res://animations/animation_curve.tres" id="3_wendf"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg6ip"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wendf"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ggu0"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3f6kh"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hg6ip"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wendf"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4ggu0"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3f6kh"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_114la"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f0q8v"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kox6w"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_la8dt"]
+xfade_time = 0.1
+xfade_curve = ExtResource("3_wendf")
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_egv3e"]
+states/Fall/node = SubResource("AnimationNodeAnimation_hg6ip")
+states/Fall/position = Vector2(621, 77)
+states/Idle/node = SubResource("AnimationNodeAnimation_wendf")
+states/Idle/position = Vector2(407, 69)
+states/Jump/node = SubResource("AnimationNodeAnimation_4ggu0")
+states/Jump/position = Vector2(610, 168)
+states/Run/node = SubResource("AnimationNodeAnimation_3f6kh")
+states/Run/position = Vector2(438, 168)
+states/Start/position = Vector2(195, 92)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_hg6ip"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_wendf"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_4ggu0"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_3f6kh"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_114la"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_f0q8v"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_kox6w"), "Fall", "Run", SubResource("AnimationNodeStateMachineTransition_la8dt")]
 
 [node name="Sketchfab_Scene" unique_id=296260741 instance=ExtResource("1_idwa6")]
 script = ExtResource("2_hg6ip")
 
-[node name="Skeleton3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/SquirrelArmature_36/GLTF_created_0" parent_id_path=PackedInt32Array(1560182145) index="0" unique_id=362235890]
-bones/6/rotation = Quaternion(0.45045745, 0.005905376, -0.03992602, 0.89188516)
-
-[node name="AnimationPlayer" parent="." index="1" unique_id=487712791]
+[node name="AnimationPlayer" parent="." index="1" unique_id=399023968]
 unique_name_in_owner = true
+autoplay = &"Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=154641404]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_egv3e")
+anim_player = NodePath("../AnimationPlayer")

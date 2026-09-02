@@ -30,7 +30,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=547186913 instance=ExtResource("2_yqjtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="ForestLevel" parent="." unique_id=2722062 instance=ExtResource("2_p57ef")]
 

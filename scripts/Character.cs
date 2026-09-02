@@ -2,8 +2,6 @@ using Godot;
 
 public partial class Character : CharacterBody3D
 {
-	private static readonly double IDLE_TIMER_DEFAULT = 2;
-
 	[ExportGroup("Camera")]
 	[Export(PropertyHint.Range, "0.0, 1.0")]
 	public float CameraSensitivity { get; set; } = .5f;
@@ -24,7 +22,6 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float SprintMultiplier { get; set; } = .75f;
 
-	private double _idleTimer = IDLE_TIMER_DEFAULT;
 	private Nutty? _nutty;
 	private Vector3 _skinDefaultGlobalRotation;
 	private Vector3 _cameraDefaultRotation;
@@ -33,9 +30,9 @@ public partial class Character : CharacterBody3D
 	private CollisionShape3D? _skin;
 	private Vector2 _cameraInputDirection = Vector2.Zero;
 	private Vector3 _lastMovementDirection = Vector3.Back;
+	private Vector3 _defaultPosition = new(0, 0.6f, 0);
 	private bool _inputEnabled = false;
 	private AnimationPlayer? _animationPlayer;
-	private bool _moved = false;
 
 	public override void _Ready()
 	{
@@ -77,14 +74,6 @@ public partial class Character : CharacterBody3D
 	{
 		if (!_inputEnabled) return;
 
-		_idleTimer -= delta;
-
-		if (_idleTimer <= 0)
-		{
-			_idleTimer = IDLE_TIMER_DEFAULT;
-			_nutty?.PlayAnimation("Idle");
-		}
-
 		var cameraPivotRotation = _cameraPivot!.Rotation;
 		cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
 		cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
@@ -111,28 +100,11 @@ public partial class Character : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-		else
-		{
-			if (rawInput.IsZeroApprox())
-			{
-				if (_moved)
-				{
-					_moved = false;
-					_nutty?.PlayAnimation("RESET");
-				}
-			}
-			else
-			{
-				_moved = true;
-				_idleTimer = IDLE_TIMER_DEFAULT;
-				_nutty?.PlayAnimation("Run");
-			}
-		}
 
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
+		var isStartingJump = Input.IsActionJustPressed("jump") && IsOnFloor();
+		if (isStartingJump)
 		{
-			velocity.Y = JumpVelocity;
-			_nutty?.PlayAnimation("RESET");
+			velocity.Y += JumpVelocity;
 		}
 
 		Velocity = velocity;
@@ -147,6 +119,31 @@ public partial class Character : CharacterBody3D
 		var globalRotation = _skin!.GlobalRotation;
 		globalRotation.Y = Mathf.LerpAngle(globalRotation.Y, targetAngle, RotationSpeed * (float)delta);
 		_skin.GlobalRotation = globalRotation;
+
+		if (isStartingJump)
+		{
+			// _nutty?.PlayAnimation("Jump");
+			_nutty?.TravelAnimation("Jump");
+		}
+		else if (!IsOnFloor() && Velocity.Y < 0)
+		{
+			// _nutty?.PlayAnimation("Fall");
+			_nutty?.TravelAnimation("Fall");
+		}
+		else if (IsOnFloor())
+		{
+			var groundSpeed = Velocity.Length();
+			if (groundSpeed > 0)
+			{
+				// _nutty?.PlayAnimation("Run");
+				_nutty?.TravelAnimation("Run");
+			}
+			else
+			{
+				// _nutty?.PlayAnimation("Idle");
+				_nutty?.TravelAnimation("Idle");
+			}
+		}
 	}
 
 	public void RotateCamera()
@@ -158,7 +155,7 @@ public partial class Character : CharacterBody3D
 	{
 		_animationPlayer?.Play("RESET");
 		Velocity = Vector3.Zero;
-		Position = Vector3.Up;
+		Position = _defaultPosition;
 		if (_skin is not null)
 			_skin.GlobalRotation = _skinDefaultGlobalRotation;
 		if (_cameraPivot is not null)
@@ -173,5 +170,11 @@ public partial class Character : CharacterBody3D
 	public void SetInputEnabled(bool inputEnabled)
 	{
 		_inputEnabled = inputEnabled;
+	}
+
+	public void Stop()
+	{
+		SetInputEnabled(false);
+		_nutty?.TravelAnimation("Idle");
 	}
 }

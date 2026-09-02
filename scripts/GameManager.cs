@@ -113,7 +113,7 @@ public partial class GameManager : Node
     {
         SignalBus.BroadcastGameOver();
         Input.MouseMode = Input.MouseModeEnum.Visible;
-        Character!.SetInputEnabled(false);
+        Character!.Stop();
 
         if (_score > _highscore)
         {
