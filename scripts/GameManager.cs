@@ -4,6 +4,7 @@ using Godot;
 public partial class GameManager : Node
 {
     private const string HIGHSCORE_PATH = "user://hs.dat";
+    private const string SETTINGS_PATH = "user://settings.dat";
 
     [Export]
     public Character? Character { get; set; }
@@ -15,9 +16,17 @@ public partial class GameManager : Node
     public Timer? GameTimer { get; set; }
     [Export]
     public GameOver? GameOver { get; set; }
+    [Export]
+    public Options? Options { get; set; }
+    [Export]
+    public Credits? Credits { get; set; }
 
     private int _score;
     private int _highscore;
+
+    private int _masterIdx;
+    private int _musicIdx;
+    private int _sfxIdx;
 
     public override void _Ready()
     {
@@ -28,9 +37,16 @@ public partial class GameManager : Node
         SignalBus.ReturnToMainMenu += ResetGame;
         SignalBus.QuitGame += QuitGame;
         SignalBus.AcornGrabbed += CharacterAcornGrabbed;
+        SignalBus.OptionsMenu += ToggleOptionsMenu;
+        SignalBus.CreditsMenu += ToggleCreditsMenu;
+
+        _masterIdx = AudioServer.GetBusIndex("Master");
+        _musicIdx = AudioServer.GetBusIndex("Music");
+        _sfxIdx = AudioServer.GetBusIndex("SFX");
 
         GameTimer.Timeout += GameTimerTimeout;
 
+        LoadSettings();
         ResetGame();
     }
 
@@ -41,6 +57,8 @@ public partial class GameManager : Node
         SignalBus.ReturnToMainMenu -= ResetGame;
         SignalBus.QuitGame -= QuitGame;
         SignalBus.AcornGrabbed -= CharacterAcornGrabbed;
+        SignalBus.OptionsMenu -= ToggleOptionsMenu;
+        SignalBus.CreditsMenu -= ToggleCreditsMenu;
 
         if (GameTimer is not null)
             GameTimer.Timeout -= GameTimerTimeout;
@@ -97,6 +115,36 @@ public partial class GameManager : Node
         GetTree().Quit();
     }
 
+    private void ToggleOptionsMenu(bool open)
+    {
+        if (open)
+        {
+            Options?.RefreshOptions();
+            Options?.Show();
+            MainMenu?.Hide();
+        }
+        else
+        {
+            SaveSettings();
+            Options?.Hide();
+            MainMenu?.Show();
+        }
+    }
+
+    private void ToggleCreditsMenu(bool open)
+    {
+        if (open)
+        {
+            Credits?.Show();
+            MainMenu?.Hide();
+        }
+        else
+        {
+            Credits?.Hide();
+            MainMenu?.Show();
+        }
+    }
+
     private void SetHighscore(int score)
     {
         _highscore = score;
@@ -141,5 +189,30 @@ public partial class GameManager : Node
         var encoded = Marshalls.RawToBase64(BitConverter.GetBytes(score));
         using var file = FileAccess.Open(HIGHSCORE_PATH, FileAccess.ModeFlags.Write);
         file.StoreString(encoded);
+    }
+
+    private void LoadSettings()
+    {
+        if (!FileAccess.FileExists(SETTINGS_PATH)) return;
+
+        using var file = FileAccess.Open(SETTINGS_PATH, FileAccess.ModeFlags.Read);
+
+        var isFullscreen = file.Get8() == 1;
+
+        DisplayServer.WindowSetMode(isFullscreen ? DisplayServer.WindowMode.Fullscreen : DisplayServer.WindowMode.Windowed);
+        AudioServer.SetBusVolumeLinear(_masterIdx, file.GetHalf());
+        AudioServer.SetBusVolumeLinear(_musicIdx, file.GetHalf());
+        AudioServer.SetBusVolumeLinear(_sfxIdx, file.GetHalf());
+    }
+
+    private void SaveSettings()
+    {
+        using var file = FileAccess.Open(SETTINGS_PATH, FileAccess.ModeFlags.Write);
+        var isFullscreen = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen;
+
+        file.Store8(isFullscreen ? (byte)1 : (byte)0);
+        file.StoreHalf(AudioServer.GetBusVolumeLinear(_masterIdx));
+        file.StoreHalf(AudioServer.GetBusVolumeLinear(_musicIdx));
+        file.StoreHalf(AudioServer.GetBusVolumeLinear(_sfxIdx));
     }
 }

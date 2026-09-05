@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://c4ovdbf1ddtwg"]
+
+[ext_resource type="Texture2D" uid="uid://dpi70dji3qfmt" path="res://assets/textures/kenney_ui-pack-adventure/scrollbar_brown.svg" id="1_a0v83"]
+
+[resource]
+texture = ExtResource("1_a0v83")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.60933006, 0.6093301, 0.60933006, 1)

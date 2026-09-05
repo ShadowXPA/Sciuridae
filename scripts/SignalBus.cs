@@ -5,6 +5,10 @@ public static class SignalBus
 {
     public static Action? StartGame;
     public static void BroadcastStartGame() => StartGame?.Invoke();
+    public static Action<bool>? OptionsMenu;
+    public static void BroadcastOptionsMenu(bool open) => OptionsMenu?.Invoke(open);
+    public static Action<bool>? CreditsMenu;
+    public static void BroadcastCreditsMenu(bool open) => CreditsMenu?.Invoke(open);
     public static Action? RestartGame;
     public static void BroadcastRestartGame() => RestartGame?.Invoke();
     public static Action? ReturnToMainMenu;

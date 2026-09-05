@@ -3,9 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://btvq16olqgchu" path="res://levels/forest/forest_level.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b6ni335ooay4i" path="res://scenes/player.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://6bp5cvaqbmos" path="res://scenes/main_menu.tscn" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cvn8pp6un4qvd" path="res://scenes/options.tscn" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://brsm2a3f1lj5c" path="res://scenes/credits.tscn" id="5_gee14"]
 [ext_resource type="Script" uid="uid://dx2yuvohme3gi" path="res://scripts/GameManager.cs" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://oo3j2glgxe0m" path="res://scenes/ui.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dt25vgwi3ymgf" path="res://scenes/game_over.tscn" id="6_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://cigtavc0tlut1" path="res://assets/music/poopie pack/journey.sample" id="9_0tnpc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gee14"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -41,16 +44,29 @@ one_shot = true
 
 [node name="MainMenu" parent="." unique_id=1510993753 instance=ExtResource("3_p57ef")]
 
+[node name="Options" parent="." unique_id=1314359078 instance=ExtResource("4_u5sy4")]
+visible = false
+
+[node name="Credits" parent="." unique_id=340357039 instance=ExtResource("5_gee14")]
+visible = false
+
 [node name="UI" parent="." unique_id=512039653 instance=ExtResource("5_p57ef")]
 visible = false
 
 [node name="GameOver" parent="." unique_id=78023160 instance=ExtResource("6_u5sy4")]
 visible = false
 
-[node name="GameManager" type="Node" parent="." unique_id=412135009 node_paths=PackedStringArray("Character", "MainMenu", "Ui", "GameTimer", "GameOver")]
+[node name="GameManager" type="Node" parent="." unique_id=412135009 node_paths=PackedStringArray("Character", "MainMenu", "Ui", "GameTimer", "GameOver", "Options", "Credits")]
 script = ExtResource("5_iywne")
 Character = NodePath("../Player")
 MainMenu = NodePath("../MainMenu")
 Ui = NodePath("../UI")
 GameTimer = NodePath("../GameTimer")
 GameOver = NodePath("../GameOver")
+Options = NodePath("../Options")
+Credits = NodePath("../Credits")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1872406319]
+stream = ExtResource("9_0tnpc")
+autoplay = true
+bus = &"Music"

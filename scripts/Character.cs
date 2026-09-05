@@ -21,6 +21,10 @@ public partial class Character : CharacterBody3D
 	public float JumpVelocity { get; set; } = 5.0f;
 	[Export]
 	public float SprintMultiplier { get; set; } = .75f;
+	[Export]
+	public Godot.Collections.Array<AudioStream> Footsteps { get; set; } = [];
+	[Export]
+	public double FootstepRate { get; set; } = 0.45;
 
 	private Nutty? _nutty;
 	private Vector3 _skinDefaultGlobalRotation;
@@ -33,6 +37,9 @@ public partial class Character : CharacterBody3D
 	private Vector3 _defaultPosition = new(0, 0.6f, 0);
 	private bool _inputEnabled = false;
 	private AnimationPlayer? _animationPlayer;
+	private AudioStreamPlayer? _footstepsSfx;
+	private double _footstepTimer;
+	private AudioStreamPlayer? _acornSfx;
 
 	public override void _Ready()
 	{
@@ -41,6 +48,8 @@ public partial class Character : CharacterBody3D
 		_camera = GetNode<Camera3D>("%Camera");
 		_skin = GetNode<CollisionShape3D>("%Skin");
 		_animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
+		_footstepsSfx = GetNode<AudioStreamPlayer>("%FootstepsSFX");
+		_acornSfx = GetNode<AudioStreamPlayer>("%AcornSFX");
 		_cameraDefaultRotation = _cameraPivot.Rotation;
 		_skinDefaultGlobalRotation = _skin.GlobalRotation;
 	}
@@ -73,6 +82,8 @@ public partial class Character : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!_inputEnabled) return;
+
+		_footstepTimer -= delta;
 
 		var cameraPivotRotation = _cameraPivot!.Rotation;
 		cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
@@ -122,11 +133,17 @@ public partial class Character : CharacterBody3D
 
 		if (isStartingJump)
 		{
+			_footstepsSfx?.Stop();
+			// _footstepTimer = 0;
+
 			// _nutty?.PlayAnimation("Jump");
 			_nutty?.TravelAnimation("Jump");
 		}
 		else if (!IsOnFloor() && Velocity.Y < 0)
 		{
+			_footstepsSfx?.Stop();
+			// _footstepTimer = 0;
+
 			// _nutty?.PlayAnimation("Fall");
 			_nutty?.TravelAnimation("Fall");
 		}
@@ -135,15 +152,33 @@ public partial class Character : CharacterBody3D
 			var groundSpeed = Velocity.Length();
 			if (groundSpeed > 0)
 			{
+				if (_footstepsSfx is not null && _footstepTimer <= 0)
+				{
+					_footstepTimer = FootstepRate;
+					PlayFootstep();
+				}
+
 				// _nutty?.PlayAnimation("Run");
 				_nutty?.TravelAnimation("Run");
 			}
 			else
 			{
+				_footstepsSfx?.Stop();
+				// _footstepTimer = 0;
+
 				// _nutty?.PlayAnimation("Idle");
 				_nutty?.TravelAnimation("Idle");
 			}
 		}
+	}
+
+	private void PlayFootstep()
+	{
+		if (_footstepsSfx is null || Footsteps.Count <= 0) return;
+
+		_footstepsSfx.Stream = Footsteps[GD.RandRange(0, Footsteps.Count - 1)];
+		_footstepsSfx.PitchScale = (float)GD.RandRange(0.9, 1.1);
+		_footstepsSfx.Play();
 	}
 
 	public void RotateCamera()
@@ -164,6 +199,7 @@ public partial class Character : CharacterBody3D
 
 	public void GrabAcorn(Acorn acorn)
 	{
+		_acornSfx?.Play();
 		SignalBus.BroadcastAcornGrabbed(acorn);
 	}
 

@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://brsm2a3f1lj5c"]
+
+[ext_resource type="Texture2D" uid="uid://drp1dnfgntcao" path="res://assets/textures/kenney_ui-pack-adventure/button_brown_close.svg" id="1_2fbfq"]
+[ext_resource type="Script" uid="uid://52j8rsdkr13u" path="res://scripts/Credits.cs" id="1_8gwij"]
+[ext_resource type="Texture2D" uid="uid://it4coykej5du" path="res://assets/textures/kenney_ui-pack-adventure/button_red_close.svg" id="2_8gwij"]
+[ext_resource type="Texture2D" uid="uid://icqkn1k6hqf" path="res://assets/textures/kenney_ui-pack-adventure/banner_hanging.svg" id="3_mah5v"]
+[ext_resource type="Theme" uid="uid://bi00jn12iiaqe" path="res://style/themes/main_theme.tres" id="4_kyhnv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooihk"]
+texture = ExtResource("3_mah5v")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 15.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ih6pn"]
+font_size = 80
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Credits" type="Control" unique_id=340357039]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8gwij")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1163013149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=609387372]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1694666697]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=744350386]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Close" type="TextureButton" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1083691429]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("1_2fbfq")
+texture_pressed = ExtResource("2_8gwij")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1492615667]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer" unique_id=1388138376]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=1498254301]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ooihk")
+
+[node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/Panel" unique_id=499007291]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+label_settings = SubResource("LabelSettings_ih6pn")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=745453770]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Programming" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=578772799]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Programming" unique_id=900414511]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+text = "Programming:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Programming" unique_id=485353117 groups=["meta_label"]]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+bbcode_enabled = true
+text = "[url=\"https://shadowxpa.github.io\"]ShadowXPA[/url]"
+fit_content = true
+
+[node name="Art" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=257062914]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Art" unique_id=287072168]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+text = "Art:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Art" unique_id=1422191811 groups=["meta_label"]]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+bbcode_enabled = true
+text = "[url=\"https://sketchfab.com/3d-models/squirrel-f442c20ca7dd4a988a17a12604556672\"]Squirrel by Kovonic[/url] edited by [url=\"https://shadowxpa.github.io\"]ShadowXPA[/url]
+
+[url=\"https://shadowxpa.github.io\"]Acorn by ShadowXPA[/url]
+
+[url=\"https://shadowxpa.github.io\"]Tree by ShadowXPA[/url] [url=\"https://www.youtube.com/watch?v=y7PdiGXbrD0\"]Branch and bark textures by CG Geek[/url]
+
+[url=\"https://github.com/HungryProton/scatter\"]Grass from Proton Scatter demo[/url]
+
+[url=\"https://ambientcg.com/a/Ground037\"]Ground037 by ambientCG[/url]
+
+[url=\"https://ambientcg.com/a/Ground068\"]Ground068 by ambientCG[/url]
+
+[url=\"https://ambientcg.com/a/Rock030\"]Rock030 by ambientCG[/url]
+
+[url=\"https://kenney.nl/assets/prototype-textures\"]Prototype Textures by Kenney[/url]
+
+[url=\"https://kenney.nl/assets/ui-pack-adventure\"]UI Pack - Adventure by Kenney[/url]"
+fit_content = true
+
+[node name="Font" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=1877698789]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Font" unique_id=802515336]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+text = "Font:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Font" unique_id=813589713 groups=["meta_label"]]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+bbcode_enabled = true
+text = "[url=\"https://fonts.google.com/specimen/Irish+Grover\"]Irish Grover (Google Fonts)[/url]"
+fit_content = true
+
+[node name="Music" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=2066804932]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Music" unique_id=205943184]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+text = "Music:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Music" unique_id=1022710933 groups=["meta_label"]]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+bbcode_enabled = true
+text = "[url=\"https://chajamakesmusic.itch.io/cute-and-silly-rpg-music-pack\"]journey by chajamakesmusic[/url]"
+fit_content = true
+
+[node name="Sound Effects" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=293341453]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Sound Effects" unique_id=174518462]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+text = "Sound Effects:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/Sound Effects" unique_id=971242741 groups=["meta_label"]]
+layout_mode = 2
+theme = ExtResource("4_kyhnv")
+bbcode_enabled = true
+text = "[url=\"https://kenney.nl/assets/music-jingles\"]jingles_STEEL16 by Kenney[/url]
+
+[url=\"https://freesound.org/people/dibko/sounds/624125/\"]Birds 04 by dibko[/url]
+
+[url=\"https://freesound.org/people/GiocoSound/sounds/421135/\"]Footstep_Grass_5 by GiocoSound[/url]"
+fit_content = true

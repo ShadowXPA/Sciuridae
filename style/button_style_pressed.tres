@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dhdbhdkgswfbw"]
+
+[ext_resource type="Texture2D" uid="uid://b3axoh4c43tl5" path="res://assets/textures/kenney_ui-pack-adventure/button_brown.svg" id="1_70hn7"]
+
+[resource]
+texture = ExtResource("1_70hn7")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.8431839, 0.8431839, 0.84318376, 1)

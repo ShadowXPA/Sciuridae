@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3lqg7mb57sbj"]
+[gd_scene format=3 uid="uid://d3lqg7mb57sbj"]
 
-[ext_resource type="Texture2D" uid="uid://caqd40d6xvulf" path="res://kenney_prototype-textures/Vector/texture_01.svg" id="1_46lwt"]
+[ext_resource type="Texture2D" uid="uid://caqd40d6xvulf" path="res://assets/textures/kenney_prototype-textures/texture_01.svg" id="1_46lwt"]
 [ext_resource type="PackedScene" uid="uid://gj2v6cldo0ot" path="res://scenes/nut_spawner.tscn" id="2_x25rp"]
 [ext_resource type="PackedScene" uid="uid://dmkhc824k5sbf" path="res://scenes/acorn.tscn" id="3_gmgay"]
 

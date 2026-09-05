@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b6ni335ooay4i"]
 
 [ext_resource type="Script" uid="uid://6e77xd85wfk4" path="res://scripts/Character.cs" id="1_agfs1"]
+[ext_resource type="AudioStream" uid="uid://rpkcfr1crro1" path="res://assets/sfx/421135__giocosound__footstep_grass_5.wav" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://igm2o685l2ld" path="res://scenes/squirrel/nutty.tscn" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://bpd3hf70phvqb" path="res://assets/sfx/kenney_music-jingles/jingles_STEEL16.ogg" id="7_smehm"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
@@ -51,10 +53,22 @@ radius = 0.2
 [node name="Player" type="CharacterBody3D" unique_id=1063641842]
 collision_layer = 2147483649
 script = ExtResource("1_agfs1")
+Footsteps = Array[AudioStream]([ExtResource("2_dqkch")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=843853004]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_qhqgy")
+
+[node name="FootstepsSFX" type="AudioStreamPlayer" parent="." unique_id=2041947084]
+unique_name_in_owner = true
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="AcornSFX" type="AudioStreamPlayer" parent="." unique_id=244363904]
+unique_name_in_owner = true
+stream = ExtResource("7_smehm")
+max_polyphony = 3
+bus = &"SFX"
 
 [node name="Skin" type="CollisionShape3D" parent="." unique_id=455973470]
 unique_name_in_owner = true

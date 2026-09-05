@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://dt25vgwi3ymgf"]
 
 [ext_resource type="Script" uid="uid://x80i6yahmiai" path="res://scripts/GameOver.cs" id="1_xeevv"]
+[ext_resource type="Texture2D" uid="uid://icqkn1k6hqf" path="res://assets/textures/kenney_ui-pack-adventure/banner_hanging.svg" id="2_tbwuq"]
+[ext_resource type="Theme" uid="uid://bi00jn12iiaqe" path="res://style/themes/main_theme.tres" id="3_racf3"]
 
 [sub_resource type="Animation" id="Animation_wqhvx"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/VBoxContainer/GameOver:label_settings:font_color")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/Panel/GameOver:label_settings:font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/GameOver:label_settings:outline_color")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Panel/GameOver:label_settings:outline_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -83,7 +85,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/VBoxContainer/GameOver:label_settings:font_color")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/Panel/GameOver:label_settings:font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -95,7 +97,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/GameOver:label_settings:outline_color")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Panel/GameOver:label_settings:outline_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -159,8 +161,15 @@ _data = {
 &"game_over": SubResource("Animation_xeevv")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7m3ot"]
+texture = ExtResource("2_tbwuq")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 15.0
+texture_margin_bottom = 20.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_xeevv"]
-font_size = 96
+font_size = 80
 font_color = Color(1, 1, 1, 0)
 outline_size = 10
 outline_color = Color(0, 0, 0, 0)
@@ -221,7 +230,11 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer" unique_id=844028009]
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=81166890]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7m3ot")
+
+[node name="GameOver" type="Label" parent="MarginContainer/VBoxContainer/Panel" unique_id=844028009]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_xeevv")
@@ -250,17 +263,17 @@ layout_mode = 2
 [node name="Restart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=714334346]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("3_racf3")
 text = "Restart"
 
 [node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1210820901]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("3_racf3")
 text = "Main Menu"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1533493432]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("3_racf3")
 text = "Quit"

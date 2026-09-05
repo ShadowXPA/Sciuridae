@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://6bp5cvaqbmos"]
 
 [ext_resource type="Script" uid="uid://b5f0ly85gtj3i" path="res://scripts/MainMenu.cs" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://icqkn1k6hqf" path="res://assets/textures/kenney_ui-pack-adventure/banner_hanging.svg" id="2_ekxnf"]
+[ext_resource type="Theme" uid="uid://bi00jn12iiaqe" path="res://style/themes/main_theme.tres" id="3_bqqt6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_egv3e"]
+texture = ExtResource("2_ekxnf")
+texture_margin_left = 15.0
+texture_margin_top = 20.0
+texture_margin_right = 15.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
-font_size = 96
+font_size = 80
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
@@ -27,15 +36,9 @@ color = Color(0, 0, 0, 0.196078)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=953481683]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -630.0
-offset_top = -350.0
-offset_right = 630.0
-offset_bottom = 350.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -48,9 +51,13 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=368741502]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 240
 
-[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1648434643]
+[node name="Panel" type="PanelContainer" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1996052346]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_egv3e")
+
+[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/Panel" unique_id=1648434643]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 50
@@ -64,11 +71,23 @@ layout_mode = 2
 [node name="Play" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=1398935398]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("3_bqqt6")
 text = "Play"
+
+[node name="Options" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=327121661]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_bqqt6")
+text = "Options"
+
+[node name="Credits" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=1374435365]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_bqqt6")
+text = "Credits"
 
 [node name="Quit" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=1396557615]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("3_bqqt6")
 text = "Quit"

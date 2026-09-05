@@ -1,0 +1,56 @@
+[gd_resource type="Theme" format=3 uid="uid://bi00jn12iiaqe"]
+
+[ext_resource type="StyleBox" uid="uid://3stk2p2f3wsj" path="res://style/button_style_hover.tres" id="1_sb0lb"]
+[ext_resource type="StyleBox" uid="uid://ceah7otv0cypx" path="res://style/button_style.tres" id="2_fmref"]
+[ext_resource type="StyleBox" uid="uid://dhdbhdkgswfbw" path="res://style/button_style_pressed.tres" id="3_nhr7i"]
+[ext_resource type="StyleBox" uid="uid://dasqu48fndeex" path="res://style/grabber_style.tres" id="4_ffj8l"]
+[ext_resource type="Texture2D" uid="uid://csn1jhvl1xv2f" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_beige_cross.svg" id="4_xc8co"]
+[ext_resource type="StyleBox" uid="uid://c4ovdbf1ddtwg" path="res://style/grabber_style_hover.tres" id="5_one7y"]
+[ext_resource type="Texture2D" uid="uid://b553y16hw6i31" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_grey_cross.svg" id="5_ph4b7"]
+[ext_resource type="Texture2D" uid="uid://dkqwexs82uodj" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_beige_checked.svg" id="6_uowi7"]
+[ext_resource type="StyleBox" uid="uid://c8pfq5svchoyb" path="res://style/grabber_style_pressed.tres" id="6_yut7e"]
+[ext_resource type="Texture2D" uid="uid://03mfcndy117" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_grey_checked.svg" id="7_uu8xu"]
+[ext_resource type="Texture2D" uid="uid://didwgc5lsjjna" path="res://assets/textures/kenney_ui-pack-adventure/round_brown_dark.svg" id="7_xc8co"]
+[ext_resource type="Texture2D" uid="uid://djcqwqwa0wmf4" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_beige_empty.svg" id="8_bkqlr"]
+[ext_resource type="Texture2D" uid="uid://c4sou5x2n2tc4" path="res://assets/textures/kenney_ui-pack-adventure/round_grey_dark.svg" id="8_ph4b7"]
+[ext_resource type="Texture2D" uid="uid://ck14abaknbbbi" path="res://assets/textures/kenney_ui-pack-adventure/round_brown.svg" id="9_uowi7"]
+[ext_resource type="Texture2D" uid="uid://ci0spe248ul11" path="res://assets/textures/kenney_ui-pack-adventure/checkbox_grey_empty.svg" id="9_xfl01"]
+[ext_resource type="StyleBox" uid="uid://bdkk7e45tud1n" path="res://style/grabber_area_style.tres" id="10_uu8xu"]
+[ext_resource type="StyleBox" uid="uid://cj5e0f5dacanc" path="res://style/grabber_area_style_pressed.tres" id="11_bkqlr"]
+
+[resource]
+Button/colors/font_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+Button/colors/font_pressed_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
+Button/font_sizes/font_size = 32
+Button/styles/hover = ExtResource("1_sb0lb")
+Button/styles/hover_pressed = ExtResource("2_fmref")
+Button/styles/normal = ExtResource("2_fmref")
+Button/styles/pressed = ExtResource("3_nhr7i")
+CheckBox/icons/checked = ExtResource("4_xc8co")
+CheckBox/icons/checked_disabled = ExtResource("5_ph4b7")
+CheckBox/icons/radio_checked = ExtResource("6_uowi7")
+CheckBox/icons/radio_checked_disabled = ExtResource("7_uu8xu")
+CheckBox/icons/radio_unchecked = ExtResource("8_bkqlr")
+CheckBox/icons/radio_unchecked_disabled = ExtResource("9_xfl01")
+CheckBox/icons/unchecked = ExtResource("8_bkqlr")
+CheckBox/icons/unchecked_disabled = ExtResource("9_xfl01")
+HScrollBar/styles/grabber = ExtResource("4_ffj8l")
+HScrollBar/styles/grabber_highlight = ExtResource("5_one7y")
+HScrollBar/styles/grabber_pressed = ExtResource("6_yut7e")
+HSlider/icons/grabber = ExtResource("7_xc8co")
+HSlider/icons/grabber_disabled = ExtResource("8_ph4b7")
+HSlider/icons/grabber_highlight = ExtResource("9_uowi7")
+HSlider/styles/grabber_area = ExtResource("10_uu8xu")
+HSlider/styles/grabber_area_highlight = ExtResource("11_bkqlr")
+Label/font_sizes/font_size = 32
+RichTextLabel/font_sizes/normal_font_size = 25
+VScrollBar/styles/grabber = ExtResource("4_ffj8l")
+VScrollBar/styles/grabber_highlight = ExtResource("5_one7y")
+VScrollBar/styles/grabber_pressed = ExtResource("6_yut7e")
+VSlider/icons/grabber = ExtResource("7_xc8co")
+VSlider/icons/grabber_disabled = ExtResource("8_ph4b7")
+VSlider/icons/grabber_highlight = ExtResource("9_uowi7")
+VSlider/styles/grabber_area = ExtResource("10_uu8xu")
+VSlider/styles/grabber_area_highlight = ExtResource("11_bkqlr")

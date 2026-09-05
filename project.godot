@@ -22,10 +22,15 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 boot_splash/stretch_mode=0
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cwnd1pfyl7bmg"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/handheld/orientation=4
 
 [dotnet]
@@ -39,6 +44,10 @@ enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addon
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom_font="uid://blverjsobknhs"
 
 [input]
 

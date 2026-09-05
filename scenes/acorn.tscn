@@ -77,7 +77,6 @@ libraries/ = SubResource("AnimationLibrary_3pykw")
 autoplay = &"rotate"
 
 [node name="AcornModel" parent="." unique_id=1722331001 instance=ExtResource("2_gl1pk")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="PickupArea" type="Area3D" parent="." unique_id=1964764288]
 unique_name_in_owner = true
