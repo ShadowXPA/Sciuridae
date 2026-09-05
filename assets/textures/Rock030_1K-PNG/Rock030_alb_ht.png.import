@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwctt4tiwj80e"
 path.bptc="res://.godot/imported/Rock030_alb_ht.png-d7dc45d390dac82fa2536298e2762d1d.bptc.ctex"
+path.astc="res://.godot/imported/Rock030_alb_ht.png-d7dc45d390dac82fa2536298e2762d1d.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/Rock030_1K-PNG/Rock030_alb_ht.png"
-dest_files=["res://.godot/imported/Rock030_alb_ht.png-d7dc45d390dac82fa2536298e2762d1d.bptc.ctex"]
+dest_files=["res://.godot/imported/Rock030_alb_ht.png-d7dc45d390dac82fa2536298e2762d1d.bptc.ctex", "res://.godot/imported/Rock030_alb_ht.png-d7dc45d390dac82fa2536298e2762d1d.astc.ctex"]
 
 [params]
 

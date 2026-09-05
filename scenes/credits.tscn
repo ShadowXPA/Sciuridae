@@ -59,11 +59,13 @@ size_flags_vertical = 3
 
 [node name="Close" type="TextureButton" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1083691429]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("1_2fbfq")
 texture_pressed = ExtResource("2_8gwij")
+stretch_mode = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1492615667]
 layout_mode = 2

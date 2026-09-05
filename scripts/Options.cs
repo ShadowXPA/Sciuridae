@@ -26,6 +26,11 @@ public partial class Options : Control
 
 		RefreshOptions();
 
+		if (OS.HasFeature("mobile"))
+		{
+			_fullscreenCheckBox.Hide();
+		}
+
 		_closeBtn.Pressed += CloseOptions;
 		_fullscreenCheckBox.Toggled += ToggleFullscreen;
 		_masterSlider.ValueChanged += MasterSliderChanged;

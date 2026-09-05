@@ -86,9 +86,27 @@ public partial class Character : CharacterBody3D
 		_footstepTimer -= delta;
 
 		var cameraPivotRotation = _cameraPivot!.Rotation;
-		cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
-		cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
-		cameraPivotRotation.Y -= _cameraInputDirection.X * (float)delta;
+
+		if (OS.HasFeature("mobile"))
+		{
+			var joystickInput = Input.GetVector(
+				"camera_left",
+				"camera_right",
+				"camera_up",
+				"camera_down"
+			);
+
+			cameraPivotRotation.X -= joystickInput.Y * (float)delta;
+			cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
+			cameraPivotRotation.Y -= joystickInput.X * (float)delta;
+		}
+		else
+		{
+			cameraPivotRotation.X -= _cameraInputDirection.Y * (float)delta;
+			cameraPivotRotation.X = Mathf.Clamp(cameraPivotRotation.X, TiltLowerLimit, TiltUpperLimit);
+			cameraPivotRotation.Y -= _cameraInputDirection.X * (float)delta;
+		}
+
 		_cameraPivot.Rotation = cameraPivotRotation;
 		_cameraInputDirection = Vector2.Zero;
 

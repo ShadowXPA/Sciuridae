@@ -20,7 +20,8 @@ run/main_scene="uid://bsy5ftm7l10k8"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 boot_splash/stretch_mode=0
-config/icon="res://icon.svg"
+boot_splash/image="uid://b881huqg4l8bu"
+config/icon="uid://b881huqg4l8bu"
 
 [audio]
 
@@ -96,3 +97,23 @@ sprint={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
+camera_up={
+"deadzone": 0.2,
+"events": []
+}
+camera_down={
+"deadzone": 0.2,
+"events": []
+}
+camera_left={
+"deadzone": 0.2,
+"events": []
+}
+camera_right={
+"deadzone": 0.2,
+"events": []
+}
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

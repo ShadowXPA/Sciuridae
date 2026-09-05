@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6auqd4570akj"
 path.bptc="res://.godot/imported/Ground037_alb_ht.png-44357dab5aed76bf185bcd918ce8cd31.bptc.ctex"
+path.astc="res://.godot/imported/Ground037_alb_ht.png-44357dab5aed76bf185bcd918ce8cd31.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/Ground037_1K-PNG/Ground037_alb_ht.png"
-dest_files=["res://.godot/imported/Ground037_alb_ht.png-44357dab5aed76bf185bcd918ce8cd31.bptc.ctex"]
+dest_files=["res://.godot/imported/Ground037_alb_ht.png-44357dab5aed76bf185bcd918ce8cd31.bptc.ctex", "res://.godot/imported/Ground037_alb_ht.png-44357dab5aed76bf185bcd918ce8cd31.astc.ctex"]
 
 [params]
 

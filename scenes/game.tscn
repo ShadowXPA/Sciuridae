@@ -34,6 +34,7 @@ shadow_enabled = true
 
 [node name="Player" parent="." unique_id=547186913 instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+SprintMultiplier = 0.0
 
 [node name="ForestLevel" parent="." unique_id=2722062 instance=ExtResource("2_p57ef")]
 

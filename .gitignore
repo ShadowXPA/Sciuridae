@@ -432,3 +432,4 @@ mono_crash.*.json
 # End of https://www.toptal.com/developers/gitignore/api/godot,csharp,visualstudiocode
 
 .out
+android

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://oo3j2glgxe0m"]
 
 [ext_resource type="Script" uid="uid://dtjdrqx63nn7s" path="res://scripts/Ui.cs" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://ck14abaknbbbi" path="res://assets/textures/kenney_ui-pack-adventure/round_brown.svg" id="2_yev5y"]
+[ext_resource type="Texture2D" uid="uid://didwgc5lsjjna" path="res://assets/textures/kenney_ui-pack-adventure/round_brown_dark.svg" id="3_gdt2y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xlq6p"]
 font_size = 60
@@ -72,3 +74,58 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "00:00"
 label_settings = SubResource("LabelSettings_x4jx1")
+
+[node name="CameraJoystick" type="VirtualJoystick" parent="." unique_id=1523693482]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+joystick_mode = 1
+action_left = &"camera_left"
+action_right = &"camera_right"
+action_up = &"camera_up"
+action_down = &"camera_down"
+visibility_mode = 1
+
+[node name="MoveJoystick" type="VirtualJoystick" parent="." unique_id=81440549]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+joystick_mode = 1
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_forward"
+action_down = &"move_backward"
+visibility_mode = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1634676914]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="JumpButton" type="TextureButton" parent="MarginContainer3" unique_id=154735472]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("2_yev5y")
+texture_pressed = ExtResource("3_gdt2y")
+stretch_mode = 5

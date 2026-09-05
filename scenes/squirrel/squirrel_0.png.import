@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca5l0fnvcdtkf"
 path.s3tc="res://.godot/imported/squirrel_0.png-927264bad62e641c7746f161ce2421f0.s3tc.ctex"
+path.etc2="res://.godot/imported/squirrel_0.png-927264bad62e641c7746f161ce2421f0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://scenes/squirrel/squirrel_0.png"
-dest_files=["res://.godot/imported/squirrel_0.png-927264bad62e641c7746f161ce2421f0.s3tc.ctex"]
+dest_files=["res://.godot/imported/squirrel_0.png-927264bad62e641c7746f161ce2421f0.s3tc.ctex", "res://.godot/imported/squirrel_0.png-927264bad62e641c7746f161ce2421f0.etc2.ctex"]
 
 [params]
 
